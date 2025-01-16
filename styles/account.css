@@ -1,0 +1,15 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+/*Стили хэдера */
+header a {
+    color: black;
+    text-decoration: none;
+}
+
+/* Footer*/
