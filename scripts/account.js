@@ -47,7 +47,7 @@ function renderOrders(orders) {
             <td>${index + 1}</td>
             <td>${formatDateTime(order.created_at)}</td>
             <td>${productNames}</td>
-            <td>${totalOrderPrice} ₽</td> <!-- Выводим общую сумму заказа -->
+            <td>${totalOrderPrice} ₽</td>
             <td>${formatDateTime(order.delivery_date)} ${order.delivery_interval}</td>
             <td>
                 <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#viewModal" data-order-id="${order.id}">

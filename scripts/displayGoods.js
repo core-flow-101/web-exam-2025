@@ -77,6 +77,16 @@ function displayGoods(goods) {
         const card = document.createElement("div");
         card.className = "col";
 
+        let priceHTML = `<strong>${item.actual_price} ₽</strong>`; // По умолчанию показываем оригинальную цену
+
+        // Проверка наличия скидки
+        if (item.discount_price && item.discount_price < item.actual_price) {
+            priceHTML = `
+                <s>${item.actual_price} ₽</s>
+                <strong>${item.discount_price} ₽</strong>
+            `;
+        }
+
         card.innerHTML = `
             <div class="card h-100" data-id="${item.id}">
                 <img src="${item.image_url}" class="card-img-top" alt="${item.name}">
@@ -88,7 +98,7 @@ function displayGoods(goods) {
                         Рейтинг: ${item.rating.toFixed(1)}
                     </p>
                     <p class="card-text">
-                        Цена: <s>${item.actual_price} ₽</s> <strong>${item.discount_price} ₽</strong>
+                        Цена: ${priceHTML}
                     </p>
                     <button class="btn btn-primary w-100 mt-2 add-to-cart">Добавить</button>
                 </div>
@@ -97,6 +107,7 @@ function displayGoods(goods) {
         goodsList.appendChild(card);
     });
 }
+
 
 //Обновление пагинации
 function updatePagination() {
