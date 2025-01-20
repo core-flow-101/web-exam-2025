@@ -162,6 +162,7 @@ document.getElementById("reset-cart").addEventListener("click", () => {
 });
 
 
+//Вычисление стоимости доставки
 function calculateDeliveryCost(deliveryDate, deliveryTime) {
     const date = new Date(deliveryDate);
     const dayOfWeek = date.getDay();

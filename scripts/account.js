@@ -21,7 +21,7 @@ function fetchOrders() {
     }
 }
 
-//Отрисовка студента
+//Отрисовка заказов
 function renderOrders(orders) {
     const tbody = document.querySelector("table.table tbody");
     tbody.innerHTML = "";
@@ -36,8 +36,8 @@ function renderOrders(orders) {
             .map((id) => {
                 const product = fetchGoodById(id);
                 if (product) {
-                    totalOrderPrice += product.discount_price; // Суммируем цены товаров
-                    return truncateText(product.name, 30); // Сокращаем название до 30 символов
+                    totalOrderPrice += product.discount_price;
+                    return truncateText(product.name, 30);
                 }
                 return `Товар ${id}`;
             })
@@ -150,7 +150,7 @@ document.getElementById("viewModal").addEventListener("show.bs.modal", (event) =
         const productNames = order.good_ids
             .map((id) => {
                 const product = fetchGoodById(id);
-                totalOrderPrice += product.discount_price; // Суммируем цены товаров
+                totalOrderPrice += product.discount_price;
                 return truncateText(product.name, 30);
             })
             .join(",  ");
@@ -254,22 +254,29 @@ function saveOrderChanges(orderId) {
 
     const xhr = new XMLHttpRequest();
     const apiUrl = `${baseURL}/exam-2024-1/api/orders/${orderId}?api_key=${apiKey}`;
-    xhr.open("PUT", apiUrl, true);
+
+
+    xhr.open("PUT", apiUrl, false);
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onload = () => {
+
+    try {
+        xhr.send(JSON.stringify(updatedOrder));
+
         if (xhr.status >= 200 && xhr.status < 300) {
             showNotification("Заказ успешно обновлён.", "success");
             fetchOrders();
             const editModal = bootstrap.Modal.getInstance(document.getElementById("editModal"));
             editModal.hide();
-
         } else {
             console.error(`Ошибка обновления заказа: ${xhr.status}`);
             showNotification("Ошибка обновления заказа.", "danger");
         }
-    };
-    xhr.send(JSON.stringify(updatedOrder));
+    } catch (error) {
+        console.error("Ошибка запроса:", error);
+        showNotification("Не удалось выполнить запрос.", "danger");
+    }
 }
+
 
 
 

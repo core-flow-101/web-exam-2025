@@ -14,18 +14,18 @@
     <header class="bg-light py-3 border-bottom">
         <div class="container-fluid">
             <div class="row align-items-center justify-content-between flex-nowrap">
-                <!-- Логотип -->
+
                 <div class="col-auto d-flex align-items-center ms-5">
                     <i class="fa-solid fa-hippo fa-2x" id="logo"></i>
                 </div>
 
-                <!-- Поле поиска -->
+
                 <div class="col d-flex justify-content-center">
                     <input type="text" class="form-control w-50" placeholder="Введите запрос">
                     <button class="btn btn-primary ms-2">Найти</button>
                 </div>
 
-                <!-- Правые элементы -->
+
                 <div class="col-auto d-flex justify-content-end align-items-center">
                     <a href="bucket.html" class="pe-3"><i class="fa-solid fa-basket-shopping fa-lg"></i></a>
                     <a href="account.html" class="pe-4 ps-3"><i class="fa-solid fa-user fa-lg"></i></a>
@@ -33,7 +33,7 @@
             </div>
         </div>
     </header>
-    <!-- Уведомления -->
+
     <div class="alert alert-success alert-dismissible fade show d-none" role="alert" id="notification">
         <strong></strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -42,7 +42,7 @@
 
     <main class="container-fluid  mt-5  px-5 d-flex flex-grow-1">
         <div class="row flex-grow-1">
-            <!-- Sidebar -->
+
             <aside class="col-md-3 border-end border-2">
                 <div class="mb-4">
                     <h5>Категории</h5>
@@ -90,16 +90,16 @@
                 </div>
             </aside>
 
-            <!-- Catalog -->
+
             <section class="col-md-9 ps-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h3 class="mb-0">Каталог</h3>
                     <div>
-                        <select class="form-select w-auto">
-                            <option>По убыванию рейтинга</option>
-                            <option>По возрастанию рейтинга</option>
-                            <option>По убыванию цены</option>
-                            <option>По возрастанию цены</option>
+                        <select class="form-select w-auto" id="filterSelect">
+                            <option value="rating_desc">По убыванию рейтинга</option>
+                            <option value="rating_asc">По возрастанию рейтинга</option>
+                            <option value="price_desc">По убыванию цены</option>
+                            <option value="price_asc">По возрастанию цены</option>
                         </select>
                     </div>
                 </div>
@@ -109,9 +109,11 @@
 
                 </div>
 
-                <div class="text-center mt-4">
-                    <button class="btn btn-secondary">Загрузить ещё</button>
-                </div>
+                <nav aria-label="Пример навигации по страницам" class="mt-3">
+                    <ul class="pagination" id="paginationNav">
+
+                    </ul>
+                </nav>
             </section>
         </div>
     </main>
