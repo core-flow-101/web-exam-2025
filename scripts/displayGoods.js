@@ -16,6 +16,34 @@ document.addEventListener("DOMContentLoaded", () => {
     filterSelect.addEventListener("change", handleFilterChange);
 });
 
+
+//Добавление товараа в корзину
+document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("add-to-cart")) {
+
+        const card = event.target.closest(".card");
+        const itemId = parseInt(card.dataset.id, 10);
+
+        if (!itemId) {
+            alert("Ошибка: Невозможно добавить товар. Некорректный ID.");
+            return;
+        }
+
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        if (cart.includes(itemId)) {
+            showNotification("Товар уже добавлен в корзину!", "warning");
+            return;
+        }
+
+        cart.push(itemId);
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        showNotification("Товар добавлен в корзину!", "success");
+
+    }
+});
+
 // Загрузка товаров с сервера с пагинацией и сортировкой
 function fetchGoods(page, sortOrder) {
     const url = `${baseURL}?api_key=${apiKey}&page=${page}&per_page=${perPage}&sort_order=${sortOrder}`;
